@@ -16,10 +16,6 @@ pip install boto3
 ```
 
 ```
-pip install  
-```
-
-```
 pip install Pillow
 ```
 
@@ -30,3 +26,5 @@ to configure use the command ->
 ```
 aws configure
 ```
+
+The user should have power to access S3 and Textract services or the user can have Power user and Admin user access.
