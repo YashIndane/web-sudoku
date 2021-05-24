@@ -1,0 +1,104 @@
+<!DOCTPYE html>
+<html>
+  <head>
+    <title>Sudoku Solver</title>
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static' , filename='fav.png') }}">
+  </head>
+  <style>
+  #camera{
+     width: 350px;
+     height: 350px;
+     border: 1px solid black;
+  }
+  #do{
+     position:absolute;
+     top:20;
+     left: 400;
+  }
+  #but{
+     position: absolute;
+     background-color: #04AA6D;
+     border: none;
+     border-radius: 8px;
+     color: white;
+     width: 352px;
+     height: 30px;
+     top: 365;
+  }
+  #pim{
+    position: absolute;
+    left: 370;
+    top: 10;
+  }
+  #sol{
+    position: absolute;
+    left: 370;
+    top: 365;
+    background-color: #50A6C2;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    width: 352px;
+    height: 30px;
+  }
+  #xo{
+    background-color: transparent;
+    border-color: transparent;
+    outline: transparent;
+  }
+  </style>
+  <body>
+    <div id="camera"></div>
+    <button onclick="take_snapshot()" id="but">TAKE SNAPSHOT</button>
+    <div id="results">
+      <form id="fo" method="GET" action="/imagepro">
+     </form>
+   </div>
+
+  </body>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
+
+
+   <script>
+    Webcam.set({
+     width:350,
+     height:350,
+     image_format:"jpeg",
+     jpeg_quality:90
+  })
+  Webcam.attach("#camera")
+
+
+   function take_snapshot(){
+     Webcam.snap(function(data_uri){
+     //document.getElementById('results').innerHTML =
+     //'<img src="'+data_uri+'"/>';
+     var z = document.createElement('img');
+     z.src = data_uri
+     z.name = "sudo_im"
+     z.id = "pim"
+
+     var i = document.createElement('input');
+     i.type = "submit"
+     i.value = "GET SOLUTION"
+     i.id = "sol"
+
+     //input box for uri
+     var k = document.createElement('input');
+     k.type = "text"
+     k.value = data_uri
+     k.name = "ur"
+     k.id = "xo"
+
+     document.getElementById('fo').appendChild(z);
+     document.getElementById('fo').appendChild(k); 
+     document.getElementById('fo').appendChild(i);
+
+     console.log(data_uri);
+
+   });
+  }
+  
+    
+  </script>
+</html>
