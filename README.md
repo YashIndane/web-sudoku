@@ -36,4 +36,8 @@ region = ""
 bucket_name = ""
 ```
 
+## How it works
+
+The user first clicks a pic of there sudoku board and submits it. The `data_uri` of the image goes to backend `app2.py` script through the form on user click.
+Using `base64`, `ìo` and `PIL` libraries, the image is saved in the server and then uploaded to `S3` bucket. Now using `AWS Textract`, the digits from the image in bucket are extracted and send back to the `app2.py`. This digits in a double array are fed to the function `sudoku3.solve()`, which returns the solution to the problem. This diits are then rendered on the `output.html` page.
 
