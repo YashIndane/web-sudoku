@@ -5,7 +5,7 @@ A flask webapp to solve sudoku from image input
 
 ![](files/solved1.png)
 
-![Demo link](https://www.linkedin.com/posts/yash-indane-aa6534179_aws-flask-python-activity-6803238011279548416-jjeQ)
+[Demo link](https://www.linkedin.com/posts/yash-indane-aa6534179_aws-flask-python-activity-6803238011279548416-jjeQ)
 
 ## Requirements
 
