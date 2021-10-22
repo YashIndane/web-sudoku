@@ -10,15 +10,15 @@ A flask webapp to solve sudoku from image input
 ## Requirements
 
 ```
-pip install flask
+$ pip install flask
 ```
 
 ```
-pip install boto3
+$ pip install boto3
 ```
 
 ```
-pip install Pillow
+$ pip install Pillow
 ```
 
 ## AWS CLI configuration
@@ -26,14 +26,14 @@ pip install Pillow
 to configure use the command ->
 
 ```
-aws configure
+$ aws configure
 ```
 
 The user should have power to access S3 and Textract services or the user can have Power user and Admin user access.
 
 In the `app2.py` file, region and bucket name should be mentioned
 
-```
+```py
 region = ""
 bucket_name = ""
 ```
