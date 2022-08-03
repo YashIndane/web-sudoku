@@ -7,35 +7,15 @@ A flask webapp to solve sudoku from image input
 
 [Demo link](https://www.linkedin.com/posts/yash-indane-aa6534179_aws-flask-python-activity-6803238011279548416-jjeQ)
 
-## Requirements
-
-```
-$ pip install flask
-```
-
-```
-$ pip install boto3
-```
-
-```
-$ pip install Pillow
-```
-
 ## AWS CLI configuration
 
-to configure use the command ->
+Have user ready in AWS with admin and power user access. This user will be used to call the AWS Textract service.
+Create a S3 bucket in this users account.
+
+# Usage
 
 ```
-$ aws configure
-```
-
-The user should have power to access S3 and Textract services or the user can have Power user and Admin user access.
-
-In the `app2.py` file, region and bucket name should be mentioned
-
-```py
-region = ""
-bucket_name = ""
+$ sudo docker run -dit -p <PORT-NO>:1453  --name <NAME> yashindane/websudoku:v1 --aak="<AWS_ACCESS_KEY>" --ask="<AWS_SECRET_KEY>" --region="<REGION>" --bucketname="<BUCKET_NAME>"
 ```
 
 ## How it works
