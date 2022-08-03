@@ -1,29 +1,57 @@
+#!/bin/python3
+
 from flask import Flask, render_template, request
 from base64 import b64decode
 from PIL import Image
 from io import BytesIO
 import boto3
 import sudoku3
+import argparse
+import subprocess
 
-app = Flask("webcam_sudoku")
+
+app = Flask("websudoku")
+
+#parsing keyword arguments and configure awscli
+def parseargs() -> None :
+  
+  global region, bucket_name
+
+  parser = argparse.ArgumentParser()
+  parser.add_argument("--aak")
+  parser.add_argument("--ask")
+  parser.add_argument("--region")
+  parser.add_argument("--bucketname")
+
+  args = parser.parse_args()
+  
+  #aws configure
+  AWS_ACCESS_KEY = args.aak
+  AWS_SECRET_KEY = args.ask
+
+  a, b = subprocess.getstatusoutput(f"aws configure set aws_access_key_id {AWS_ACCESS_KEY}")
+  a, b = subprocess.getstatusoutput(f"aws configure set aws_secret_access_key {AWS_SECRET_KEY}")
+  region = args.region
+  bucket_name = args.bucketname
+  
 
 @app.route("/input")
 def take_image():
   return render_template("webcam3.html")
 
-@app.route("/imagepro" , methods=["GET"])
+
+@app.route("/imagepro", methods=["GET"])
 def process_image():
 
   #getting the image
+  filename = "imagesudoku.png"
+
   uri_string = request.args.get("ur")
   uri_string = uri_string[uri_string.index(",") + 1:]
   im = Image.open(BytesIO(b64decode(uri_string)))
-  im.save('image23.png', 'PNG')
+  im.save(filename, 'PNG')
 
   #putting image in S3
-  region = ""
-  bucket_name = ""
-  filename = "image23.png"
   s3 = boto3.resource("s3")
   s3.Bucket(bucket_name).upload_file(filename, filename)
 
@@ -41,7 +69,7 @@ def process_image():
   
   temp_array = []
   p = 0
-  for i in range(1 , 81):
+  for i in range(1, 81):
    if p == 81:
        break
    else:
@@ -68,10 +96,6 @@ def process_image():
   
   sa = solved_array
   
-
-
-  
-  
   return render_template("output.html" , 
   a1=sa[0][0] , a2=sa[0][1] , a3=sa[0][2] , a4=sa[0][3] , a5=sa[0][4] , a6=sa[0][5] , a7=sa[0][6] , a8=sa[0][7] , a9=sa[0][8] , 
   a10=sa[1][0] , a11=sa[1][1] , a12=sa[1][2] , a13=sa[1][3] , a14=sa[1][4] , a15=sa[1][5] , a16=sa[1][6] , a17=sa[1][7] , a18=sa[1][8] ,  
@@ -83,4 +107,7 @@ def process_image():
   a64=sa[7][0] , a65=sa[7][1] , a66=sa[7][2] , a67=sa[7][3] , a68=sa[7][4] , a69=sa[7][5] , a70=sa[7][6] , a71=sa[7][7] , a72=sa[7][8] ,  
   a73=sa[8][0] , a74=sa[8][1] , a75=sa[8][2] , a76=sa[8][3] , a77=sa[8][4] , a78=sa[8][5] , a79=sa[8][6] , a80=sa[8][7] , a81=sa[8][8])
 
-app.run(host="0.0.0.0", port="228")
+
+if __name__ == "__main__":
+    parseargs()
+    app.run(host="0.0.0.0", port="1453")
