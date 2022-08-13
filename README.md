@@ -18,6 +18,12 @@ Create a S3 bucket in this users account.
 $ sudo docker run -dit -p <PORT-NO>:1453  --name <NAME> yashindane/websudoku:v1 --aak="<AWS_ACCESS_KEY>" --ask="<AWS_SECRET_KEY>" --region="<REGION>" --bucketname="<BUCKET_NAME>"
 ```
 
+# On arm64 v8 machines
+
+```
+$ sudo docker run --platform linux/arm64/v8 -dit -p <PORT-NO>:1453  --name <NAME> yashindane/websudoku:arm64v8 --aak="<AWS_ACCESS_KEY>" --ask="<AWS_SECRET_KEY>" --region="<REGION>" --bucketname="<BUCKET_NAME>"
+```
+
 ## How it works
 
 The user first clicks a pic of there sudoku board and submits it. The `data_uri` of the image goes to backend `app2.py` script through the form on user click.
