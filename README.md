@@ -3,7 +3,7 @@
 # web-sudoku
 A flask webapp to solve sudoku from image input
 
-![](files/solved1.png)
+![solved1](https://user-images.githubusercontent.com/53041219/207013634-3a80d9ab-0e3d-43d5-a4da-628be5626c9a.png)
 
 [Demo link](https://www.linkedin.com/posts/yash-indane-aa6534179_aws-flask-python-activity-6803238011279548416-jjeQ)
 
